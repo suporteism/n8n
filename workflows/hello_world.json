@@ -1,0 +1,67 @@
+{
+    "name": "Hello World",
+    "nodes": [
+        {
+            "parameters": {},
+            "id": "manual-trigger",
+            "name": "When clicking Execute Workflow",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                712,
+                352
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "return [\n  {\n    json: {\n      message: \"Hello World from your local n8n!\"\n    }\n  }\n];"
+            },
+            "name": "Code",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 1,
+            "position": [
+                912,
+                352
+            ],
+            "id": "561b5ea9-6417-416b-a3be-830fd56a4069"
+        },
+        {
+            "parameters": {
+                "url": "https://api.chucknorris.io/jokes/random",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                1120,
+                352
+            ],
+            "id": "02e9dfe9-bb2d-4f6c-b7bf-cedd07207b60",
+            "name": "HTTP Request"
+        }
+    ],
+    "connections": {
+        "When clicking Execute Workflow": {
+            "main": [
+                [
+                    {
+                        "node": "Code",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Code": {
+            "main": [
+                [
+                    {
+                        "node": "HTTP Request",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}
